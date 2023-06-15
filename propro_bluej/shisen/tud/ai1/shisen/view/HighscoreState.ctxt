@@ -1,0 +1,19 @@
+#BlueJ class context
+comment0.target=HighscoreState
+comment0.text=\n\ Die\ Klasse\ regelt\ die\ graphische\ Darstellung\ der\ Highscore-Seiten.\n\n\ @author\ Lennart\ Fedler,\ Andrej\ Felde,\ Daniel\ Stein\n
+comment1.params=stateID
+comment1.target=HighscoreState(int)
+comment1.text=\n\ Konstruktor\ des\ HighscoreState.\n\n\ @param\ stateID\ Uebergebene\ ID\ des\ zu\ aufrufenden\ States.\n\n
+comment2.params=gc\ sb
+comment2.target=void\ init(org.newdawn.slick.GameContainer,\ org.newdawn.slick.state.StateBasedGame)
+comment2.text=\n\ Initialisiert\ den\ HighscoreState.\n\ \n\ (non-Javadoc)\n\ \n\ @see\ org.newdawn.slick.state.GameState\#init(org.newdawn.slick.GameContainer,\n\ \ \ \ \ \ org.newdawn.slick.state.StateBasedGame)\n
+comment3.params=gc\ sb\ graphics
+comment3.target=void\ render(org.newdawn.slick.GameContainer,\ org.newdawn.slick.state.StateBasedGame,\ org.newdawn.slick.Graphics)
+comment3.text=\n\ Rendert\ einen\ Frame\ des\ HighscoreStates.\n\ \n\ @param\ gc\ \ \ \ \ \ \ GameContainer\n\ @param\ sb\ \ \ \ \ \ \ StateBasedGame\n\ @param\ graphics\ Graphics\n\ \n\ @throws\ SlickException\ Wirft\ eine\ SlickException,\ wenn\ beim\ Rendern\ ein\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Fehler\ auftritt.\n
+comment4.params=gameContainer\ stateBasedGame\ delta
+comment4.target=void\ update(org.newdawn.slick.GameContainer,\ org.newdawn.slick.state.StateBasedGame,\ int)
+comment4.text=\n\ Updated\ den\ EntityManager\ und\ alle\ seine\ Entities.\n\ \n\ @param\ gameContainer\ \ GameContainer\n\ @param\ stateBasedGame\ StateBasedGame\n\ @param\ delta\ \ \ \ \ \ \ \ \ \ Delta\n
+comment5.params=
+comment5.target=int\ getID()
+comment5.text=\n\ Gibt\ die\ ID\ zurueck.\n\ \n\ @return\ ID\n
+numComments=6
