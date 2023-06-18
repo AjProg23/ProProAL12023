@@ -14,7 +14,7 @@ import tud.ai1.shisen.util.PathFinder;
  *         Jakobi, Max Kratz, Niklas Vogel
  *
  */
-public abstract class Grid implements IGrid {
+public class Grid implements IGrid {
 
     private int waitTime = 1000;
     private TokenState destiny;
@@ -50,7 +50,7 @@ public abstract class Grid implements IGrid {
      
      public IToken getTokenAt(int x, int y){ //Ex.3c
          if(x >= 0 && y >= 0){
-            return  Token.getValue();
+            return selectedTokenOne;
          }
          else{
              return null;
@@ -64,7 +64,7 @@ public abstract class Grid implements IGrid {
      * @return Grid
      */
      public  IToken[][] getGrid(){ //Ex.3d
-         return getGrid();
+         return grid;
      }    
      
      
@@ -74,8 +74,7 @@ public abstract class Grid implements IGrid {
      * @return Aktive Tokens
      */
      public  IToken[] getActiveTokens(){ //Ex.3d  
-         getActiveTokens();
-        return  new IToken(selectedTokenTwo, selectedTokenOne); 
+        return  selectedTokenTwo && selectedTokenOne; 
      }
      
      /**
@@ -84,7 +83,7 @@ public abstract class Grid implements IGrid {
      * @return True wenn beide selektierten Token angeklickt wurde
      */
     public boolean bothClicked(){
-     return bothClicked();
+     return bothClicked;
     }
     
     
