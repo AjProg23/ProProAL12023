@@ -1,5 +1,6 @@
 package tud.ai1.shisen.model;
 
+import java.util.*;
 import java.util.List;
 
 import org.newdawn.slick.geom.Vector2f;
@@ -72,9 +73,10 @@ public class Grid implements IGrid {
      * Liefert die gerade aktiven Tokens zurueck.
      * 
      * @return Aktive Tokens
-     */
+    */
      public  IToken[] getActiveTokens(){ //Ex.3d  
-        return  selectedTokenTwo && selectedTokenOne; 
+        IToken[] AktiveTokens = {selectedTokenOne,selectedTokenTwo}; 
+        return   AktiveTokens;
      }
      
      /**
@@ -83,21 +85,63 @@ public class Grid implements IGrid {
      * @return True wenn beide selektierten Token angeklickt wurde
      */
     public boolean bothClicked(){
-     return bothClicked;
+        if(selectedTokenOne != null && selectedTokenTwo != null){
+           return true;
+        } 
+        else{
+          return false;
+        }
     }
     
     
      /**
-     * TODO: Aufgabe 3f
+     * Falls der uebergebene Token derzeit angewaehlt ist, wird er abgewaehlt.
+     * 
+     * @param Token Der abzuwaehlende Token.
      */
+    public void deselectToken(IToken token){ //Ex. 3f 
+         if(token != null){
+           TokenState state = TokenState.DEFAULT;
+           token = null;
+         }
+    }
+    
+    /**
+     * Deselektiert die beiden Token.
+     */
+    public void deselectTokens(){//Ex. 3f 
+      if(selectedTokenOne != null && selectedTokenTwo != null){
+          selectedTokenOne = null;  
+          selectedTokenTwo = null;
+      }
+    }
      
-     /**
-     * TODO: Aufgabe 3g
-     */
+    
+     //tips: when a token is solved it gets the -1 value && 
+     //  TokenState state = TokenState.SOLVED;
+     // private List<IToken> list;
+     public static boolean isSolved(){  //Ex. 3g
+        List<IToken> list = null;
+        TokenState SolvedState = TokenState.SOLVED; 
+        boolean solved = false;   
+        while(solved == false){
+           for(int i = 0; i < list.size(); i++){
+               
+           }   
+        }
+        
+        return solved;
+     }
      
-     /**
-     * TODO: Aufgabe 3h
-     */
+     private Token[][] parseMap(String path){
+       TokenState state = TokenState.DEFAULT;
+       Vector2f pos;
+       int x; int y;
+       pos = new Vector2f(x,y);
+       File file = new File(C:\Users\Ahed Al Hijjawi\Desktop\ProPro2023\propro_bluej\shisen\assets\maps);
+       String content = FileUtils.readFileToString(file, "UTF-8");
+       return 
+     }
 
     /**
      * Updated den Score um incr. Sollte der Score anschliessend negativ sein, so
