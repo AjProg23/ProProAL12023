@@ -43,9 +43,11 @@ public class HighscoreEntry implements Comparable<HighscoreEntry> {
      * @param date     Datum des gespielten Spiels.
      * @param score    Erspielter Score.
      * @param duration Benoetigte Zeit in Sekunden.
+     * 
+     * If the parameters are valid, they get initialized with appropriate values.
      */
-    public HighscoreEntry(LocalDateTime date, int score, double duration) {
-        if(duration >= 0 && score >= 0 && score < 1000){
+    public HighscoreEntry(LocalDateTime date, int score, double duration) {//Ex.4b
+        if(duration >= 0 && score >= 0 && score < 1000){ 
            date = null;
            score = 0;
            duration = 00;
@@ -55,24 +57,26 @@ public class HighscoreEntry implements Comparable<HighscoreEntry> {
     /**
      * 
      */
-    public HighscoreEntry(String data) {
-        // TODO Aufgabe 4.1c
+    public HighscoreEntry(String data) {//Ex.4c
+      
     }
 
     /**
+     * @param date is the field that rappresents the date and time of the game
+     * @param score is the field that rappresents the highscore achieved
+     * @param duration  is the field that rappresents the used time in seconds
      * 
+     * If we insert the wrong value so that 
+     * 1 of these conditions is true, the system throws an IllegalArgumentException with 
+     * a reminder on screen of the reason that shouldn't happen and the program will stop.
+     * 
+     * While when the parameter date is null, the method validate() throws an IllegalArgumentException
+     * ,by using a try-catch block we catch the exception and we print on screen the fact 
+     * that an exception has been thrown. This action does not stop the program from working because
+     * we just catched the exception. The program will still be executed just as we want.
      */
-    public void validate(LocalDateTime date, int score, double duration) {
-        if(date == null ){
-          throw new IllegalArgumentException("date was null");
-        } 
-        
-        /*{try
-          
-        } catch(IllegalArgumentException e){
-          
-        }*/
-        
+    public void validate(LocalDateTime date, int score, double duration) { //Ex.4a
+         
         if(duration < 0){
           throw new IllegalArgumentException("duration was negative");
         }
@@ -81,17 +85,38 @@ public class HighscoreEntry implements Comparable<HighscoreEntry> {
           throw new IllegalArgumentException("score was negative or greater than 1000"); 
         }
 
+         try{ 
+             
+             if(date == null ){
+                   throw new IllegalArgumentException("date was null");
+             } 
+         } 
+        
+          catch(IllegalArgumentException e){
+            System.out.println("IllegalArgumentException was thrown");
+        }
     }
 
     /**
-     * 
+     * method that compares the HighscoreEntry with the @param obj.
+     * First we check that the param obj is not null,we create a default obj and a default
+     * HighscoreEntry. 
+     * If obj and HighscoreEntry are of the same type then I compare the attributes of the 2 objects
+     * to see if they are the same. If they are the same, the boolean @param Answer will be switched
+     * to true, or else remain false.
+     * @return Answer as a final value
      */
     @Override
-    public boolean equals(Object obj) {
-        // TODO Aufgabe 4.1d
+    public boolean equals(Object obj) {//Ex.4d
         assert obj != null: "obj is null";
-         //obj.equals()
-            return false;
+        obj = new Object();
+        boolean Answer = false;
+        HighscoreEntry a = new HighscoreEntry(date,score,duration);
+        if(obj instanceof HighscoreEntry){
+           Answer = obj.equals(a); 
+          return Answer;
+        }
+        return Answer;
     }
 
     /**
@@ -133,13 +158,35 @@ public class HighscoreEntry implements Comparable<HighscoreEntry> {
     }
 
     /**
-     * 
-     */
+     * @param o is an object of type HighscoreEntry 
+     * If the current HighscoreEntry(this) score is less than the score of the passed object o
+     * it @returns 1; 
+     * If opposite then @return is -1;
+     * If this.score is equal to o.score than I have to compare their attibute field of duration 
+       in an inverted way than before. If both durations are equal than I @return 0 as a value.
+    */
     @Override
-    public int compareTo(HighscoreEntry other) {
-        // TODO Aufgabe 4.1e
-            return -1;
-    }
+    public int compareTo(HighscoreEntry o) {// TODO Aufgabe 4.e
+            
+            if(this.score < o.score){
+             return 1; //gives a positive number
+            } 
+            if(this.score > o.score){
+             return -1; //gives a negative number
+            } 
+            else{
+                if(this.duration < o.duration){
+                  return -1;
+                }
+                if(this.duration > o.duration){
+                  return 1;
+                }
+                else{
+                  return 0;
+                }
+            }
+        }
+
 
     /**
      * Diese Methode gibt die String-Repraesentation des Objekts zurueck.

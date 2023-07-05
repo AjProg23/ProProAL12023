@@ -1,6 +1,7 @@
 package tud.ai1.shisen.model;
 
-import java.util.*;
+import java.io.FileReader;
+import java.io.IOExceptions;
 import java.util.List;
 
 import org.newdawn.slick.geom.Vector2f;
@@ -24,8 +25,8 @@ public class Grid implements IGrid {
     private List<IToken> list;
     private static int score = 0;
     
-    private static IToken[][] grid = null;    //Ex.3a
-    private IToken selectedTokenOne = null;    //Ex.3a
+    private static IToken[][] grid;    //Ex.3a, grid represents the whole matrix of fields
+    private IToken selectedTokenOne = null;    //Ex.3a, intuitive
     private IToken selectedTokenTwo = null;    //Ex.3a
 
    
@@ -43,12 +44,25 @@ public class Grid implements IGrid {
         grid = demoGrid;
     }
     
+    /**
+     * @param String a is a file path to a map in the form of a string. 
+     */
     public Grid(String a){   //Ex.3b
-       // parseMap(String path);  
-        fillTokenPositions();
-        int score = 0;
+        parseMap(String path);  
+        fillTokenPositions();  
+        int score = 0;  //starts score with 0
     }
      
+    /**
+     * @param int x stands for columns and int y for rows in the matrix.
+     * together they rappresent the coordinates of a single field in the matrix.
+     * 
+     * @1.return: returns the token that lies on the given coordinates of the matrix, but only 
+     * if x and y are positive (there are no negative coordinates in a matrix)
+     * 
+     * @2.return: if either x or y are negative then we return the value null because the
+     * token at coordinates (x,y) cannot be selected as it is outside of the matrix. s 
+     */
      public IToken getTokenAt(int x, int y){ //Ex.3c
          if(x >= 0 && y >= 0){
             return selectedTokenOne;
@@ -62,7 +76,7 @@ public class Grid implements IGrid {
        /**
      * Gibt das Grid zurueck.
      * 
-     * @return Grid
+     * @return Grid of the constructor
      */
      public  IToken[][] getGrid(){ //Ex.3d
          return grid;
@@ -72,7 +86,8 @@ public class Grid implements IGrid {
         /**
      * Liefert die gerade aktiven Tokens zurueck.
      * 
-     * @return Aktive Tokens
+     * @return Aktive Tokens in a form of an IToken array of length 2 with the values of selectedTokenOne
+     * and selectedTokenTwo inside. 
     */
      public  IToken[] getActiveTokens(){ //Ex.3d  
         IToken[] AktiveTokens = {selectedTokenOne,selectedTokenTwo}; 
@@ -82,9 +97,15 @@ public class Grid implements IGrid {
      /**
      * Tested ob beide selektierten Tokens angeklickt wurden.
      * 
-     * @return True wenn beide selektierten Token angeklickt wurde
+     * @return True when 2 Tokens have been clicked on, that happens when both SelectedTokenOne 
+     * and SelectedTokenTwo are different from null because null is the default value where no 
+     * token have yet been clicked on. If they 
+     * are different from null it means that they contain new values and thus meaning that 
+     * 2 Tokens have been clicked on. 
+     * 
+     * @return false if either of SelectedTokenOne or SelectedTokenTwo are still null.
      */
-    public boolean bothClicked(){
+    public boolean bothClicked(){//Ex.3e
         if(selectedTokenOne != null && selectedTokenTwo != null){
            return true;
         } 
@@ -96,6 +117,8 @@ public class Grid implements IGrid {
     
      /**
      * Falls der uebergebene Token derzeit angewaehlt ist, wird er abgewaehlt.
+     * If the @param token is selected(!=null for the reasons mentioned above) we set its state
+     * to default and deselect it (token = null)
      * 
      * @param Token Der abzuwaehlende Token.
      */
@@ -108,6 +131,7 @@ public class Grid implements IGrid {
     
     /**
      * Deselektiert die beiden Token.
+     * If both (&&)tokens are already selected(!=null) we deselect them (= null)
      */
     public void deselectTokens(){//Ex. 3f 
       if(selectedTokenOne != null && selectedTokenTwo != null){
@@ -120,27 +144,47 @@ public class Grid implements IGrid {
      //tips: when a token is solved it gets the -1 value && 
      //  TokenState state = TokenState.SOLVED;
      // private List<IToken> list;
+     // for(int i = 0; i < list.size(); i++)
+     /**
+     * We have to iterate the List of Itokens so we give and indicator int i a starting value
+     * so that we can scroll the list.
+     * While I is less than the list size (we dont want the OutOfBounds error message) and
+     * the current IToken we are inspecting is "Solved", we put the value of @return to true and 
+     * increment (scroll the list further)the indicator i. 
+     * If we have a case where an Itoken is not solved, we put the value of @return to false and 
+     * break the loop so that the final @return value of the method is false.
+     * 
+     * 
+     */
      public static boolean isSolved(){  //Ex. 3g
         List<IToken> list = null;
-        TokenState SolvedState = TokenState.SOLVED; 
-        boolean solved = false;   
-        while(solved == false){
-           for(int i = 0; i < list.size(); i++){
-               
-           }   
+        TokenState TokenIsSolved = TokenState.SOLVED; 
+        boolean GridIsSolved = false;
+        int i = 0;
+           while(i < list.size()){
+               if(IToken == TokenIsSolved){
+                return GridIsSolved = true;
+                i++;
+               }
+               else{
+                 return GridIsSolved = false;
+                 break;
+                } 
+           }
+            return GridIsSolved;
         }
-        
-        return solved;
-     }
      
-     private Token[][] parseMap(String path){
-       TokenState state = TokenState.DEFAULT;
-       Vector2f pos;
+        /**
+         * @param String path is a path to a map file and is used to construct the grid matrix of 
+         * tokens. 
+         * 
+         * 
+         */
+     private Token[][] parseMap(String path){ //Ex.3h
+       TokenState state = TokenState.DEFAULT; //initial state
+       Vector2f pos;  //position on the grid
        int x; int y;
        pos = new Vector2f(x,y);
-       File file = new File(C:\Users\Ahed Al Hijjawi\Desktop\ProPro2023\propro_bluej\shisen\assets\maps);
-       String content = FileUtils.readFileToString(file, "UTF-8");
-       return 
      }
 
     /**
@@ -241,7 +285,7 @@ public class Grid implements IGrid {
                     this.selectedTokenTwo.setTokenState(this.destiny);
                     this.selectedTokenOne = null;
                     this.selectedTokenTwo = null;
-                    this.timerActive = false;
+                   this.timerActive = false;
                 } catch (final Exception e) {
                     e.printStackTrace();
                 }

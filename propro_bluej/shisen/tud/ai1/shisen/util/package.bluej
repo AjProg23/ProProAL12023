@@ -1,15 +1,15 @@
 #BlueJ package file
-dependency1.from=Cheats
-dependency1.to=Consts
+dependency1.from=TokenDisplayValueProvider
+dependency1.to=IOOperations
 dependency1.type=UsesDependency
-dependency2.from=Cheats
-dependency2.to=PathFinder
+dependency2.from=TokenDisplayValueProvider
+dependency2.to=Consts
 dependency2.type=UsesDependency
-dependency3.from=TokenDisplayValueProvider
-dependency3.to=IOOperations
+dependency3.from=Cheats
+dependency3.to=Consts
 dependency3.type=UsesDependency
-dependency4.from=TokenDisplayValueProvider
-dependency4.to=Consts
+dependency4.from=Cheats
+dependency4.to=PathFinder
 dependency4.type=UsesDependency
 objectbench.height=93
 objectbench.width=760
